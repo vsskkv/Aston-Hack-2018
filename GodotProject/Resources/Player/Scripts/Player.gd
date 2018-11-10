@@ -1,22 +1,29 @@
-extends "res://Characters/Entity.gd"
-#To prevent enemies shooting other enemies
-const TYPE = "PLAYER"
+extends "res://Resources/Player/Scripts/Entity.gd"
 
-var speed = 100
+const SPEED = 150
+
 
 func _physics_process(delta):
-	_contorl_loop()
+	_control_loop()
 	movement_loop()
 	spritedir_loop()
-	
-	if movedir != dir.CENTER:
+
+	if movedir != Vector2(0,0):
 		anim_switch(spritedir)
 	else:
 		$Anim.stop()
 
+
+
 func _control_loop():
-	var left = Input.is_action_pressed("ui_left")
-	var right = Input.is_action_pressed("ui_right")
-	var up = Input.is_action_pressed("ui_up")
-	var interact = Input.is_action_pressed("ui_e")
-	var attack = Input.is_action_pressed("ui_select")
+	var Left = Input.is_action_pressed("ui_left")
+	var Right = Input.is_action_pressed("ui_right")
+	var Up = Input.is_action_pressed("ui_up")
+	var Interact = Input.is_action_pressed("ui_e")
+
+	movedir.x = -int (Left) + int (Right)
+	movedir.y = - int(Up)
+	
+
+	
+	
